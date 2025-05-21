@@ -33,27 +33,23 @@ Temos um foco de mercado direcionado a maiores de idade, temos um grande potenci
 
 # Projeto IA
 
-Trabalhando com o treinamento de um modelo de regressão, que tem como dados: id_alerta, motivo, tipo_fraude, data_alerta, status, id_solicitacao_pagamento, id_paciente, cpf_paciente, data_nascimento_paciente, telefone_paciente, id_clinica, razao_social_clinica, cnpj_clinica, telefone_clinica, id_procedimento, descricao_procedimento, valor_procedimento, id_solicitacao, data_solicitacao, valor_requerido, status_pagamento e de acordo com a coluna tipo_fraude, é gerada a coluna Chances_Fraude, a coluna "Chances_Fraude", tem os valores de 0 e 1, sendo 0 = sem chances de fraude e 1 = existem chances de fraude, para este projeto estamos utilizando:    
+Trabalhando com o treinamento de um modelo de RandomForest, que tem como dados: id_alerta, motivo, tipo_fraude, data_alerta, status, id_solicitacao_pagamento, id_paciente, cpf_paciente, data_nascimento_paciente, telefone_paciente, id_clinica, razao_social_clinica, cnpj_clinica, telefone_clinica, id_procedimento, descricao_procedimento, valor_procedimento, id_solicitacao, data_solicitacao, valor_requerido, status_pagamento e de acordo com a coluna tipo_fraude, é gerada a coluna Chances_Fraude, a coluna "Chances_Fraude", tem os valores de 0 e 1, sendo 0 = sem chances de fraude e 1 = existem chances de fraude, para este projeto estamos utilizando:    
 - Pandas: Com o foco em ler o arquivo CSV selecionado "dados_fraude.csv";
 - Matplotlib: Utilizado para a criação de gráficos, para a análise dos dados de Distribiução de Score de Crédito, Renda Anual vs Chances de Fraude e Número de Transações vs Chances de Fraude;
 - Scikit-learn: Fazendo a separação dos dados em "X" e "y" depois fazemos a separação em X_train, X_test, y_train, y_test, utilizando "train_test_split", logo em seguida nós treinamos o modelo e utilizamos o accuracy_score, para vermos qual foi a Acurácia do modelo;
-- Oracledb: Para que a conexão entre o projeto e o Banco de Dados seja estabelecida;  
-  
-Iremos melhorar a API para a coleta dos dados que serão utilizados no modelo de detecção de sinistros, o modelo, ainda na versão Beta, utiliza de dados ficticios, para que haja o funcionamento;  
+- Pymongo: Para que a conexão entre o projeto e o Banco de Dados seja estabelecida, assim nós podemos fazer a predição, utilizando o modelo criado e depois nós fazemos um UPDATE nos dados que foram analisados, para inserir a coluna "previsao_fraude";    
 
-# Melhorias Realizadas  
+# Melhorias Realizadas na sprint 4  
 
-- Alteração do CSV utilizado: agora as colunas fazem mais sentido, tendo conexão com as colunas criadas no Banco de Dados;
-- Maior tratamento de dados: na atualização do projeto, fizemos uma melhora no tratamento dos dados, já que tivemos que excluir linhas com valores nulos, codificar manualmente colunas com valores do tipo String e usar o LabelEncoder para uma codificação de colunas mais simples, como a de "status_pagamento" e a de "status";
-- Mudança no modelo: Após mudarmos os dados para treinamento do modelo, também mudamos o tipo do nosso modelo, o que antes era um "Logistic Regression" virou um "Random Forest";  
+- Formatação do Pandas e do Pyplot: para a melhoria na visualização dos dados no dataframe, foram utilizadas foramatações para que não haja limitação de colunas ao ser mostrado, maximo de linhas foi colocado em 100 e limitação de duas casas decimais em qualquer numero. Melhoria dos gráficos, ao utilizar a configuração "fivethirtyeight".
+- Pequenos alinhamentos no CSV utilizado: reformulação das colunas "descricao_procedimento", "valor_procedimento" e "valor_requirido", na coluna "descricao_atendimento" foram inseridos somente tipod de consulta que o plano da Odontoprev cobre nos seus planos, nas colunas de "valor_procedimento" e "valor_requirido", os valores foram alterados, já que o "valor_procedimento" seria a média de cobertura de valor por cada tipo de consulta, então foram feitos os alinhamentos das 3 colunas, causando assim, uma melhora de quase 2% no modelo;
+- Conexão com MongoDB: alteramos o banco utilizado, anteriormente Oracle e agora com o MongoDB, para que tenhamos mais flexibilidade e facilidade no projeto, agora nós coletamos os dados do banco pelo CPF do paciente, verificamos os dados já analisados, fazemos algumas mutações nos dados ainda não analisados, para passar ele para o modelo e depois fazemos um UPDATE em todos os dados agora analizados, adicionando a coluna "previsao_fraude";
 
-# Melhorias para Próxima Entrega  
+# Autocrítica  
 
-As melhorias previstas, são:  
-- Conexão com o projeto: mesmo conectando com o banco de dados, por falta de dados inseridos, até o momento, não tivemos uma iclusão maior do nosso projeto;
-- Modelo: mesmo chegando em uma acurácia de 90.4%, ainda precisamos melhora-lo, vista que tinhamos dois dados, "0" e "1", a precisão do modelo com o "0" foi de apenas 69%, ao mesmo tempo em que a precisão com o "1", foi de 94%;
+- Modelo: depois de várias tentativas, não foi possível fazer grandes melhorias na precision, recall e f1-score referentes ao "0", apenas um pequeno aumento de 0.65 para 0.70, foi tentado criar colunas para a melhora da analise, pequenos alinhamentos nos dados do CSV, mas nenhuma "grande" melhoria foi atingida;
   
 # Links  
 
 Projeto:  
-https://youtu.be/Q-xwUeuJtAE
+https://youtu.be/wNUnDOJyW2k
